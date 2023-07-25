@@ -1,0 +1,47 @@
+﻿@model Library
+
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<style>
+    table, th, td {
+        border: 1px solid blue;
+        border-collapse: collapse;
+        font-size: 20px;
+    }
+
+    th {
+        background-color: #96D4D4;
+    }
+</style>
+
+<h1>Search results of books containing the keyword</h1>
+<h2>If you see no results, either you did not type "category"/"author"/"title" correctly for the first search box, or there are no books available containing the search term. Please click on Search Books on the top bar to search again. </h2>
+
+<div class="text-center">
+    <table id="table">
+        <tr>
+            <td>Book Title</td>
+            <td>Book Category</td>
+            <td>Date Published (MMDDYY)</td>
+            <td>Author Name</td>
+            <td>Quantity Available</td>
+            @{
+                int i = 0;
+            }
+        </tr>
+        @foreach (Book b in Model.bookSearchResults)
+        {
+            <tr>
+                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).title)</td>
+                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).category)</td>
+                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).publishDate)</td>
+                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).author.name)</td>
+                <td>@b.quantity</td>
+            </tr>
+            i++;
+        }
+    </table>
+    }
+</div>

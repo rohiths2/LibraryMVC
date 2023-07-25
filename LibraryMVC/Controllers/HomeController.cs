@@ -103,6 +103,66 @@ namespace LibraryMVC.Controllers
             return View(library);
         }
 
+        public IActionResult SearchOptions()
+        {
+            string[] filters = new string[2];
+            return View(filters);
+        }
+
+        [HttpPost]
+        public IActionResult SearchOptions(string[] filters)
+        {
+            if (filters[0] == "title")
+            {
+                foreach (Book b in library.books.Books)
+                {
+                    string[] split = b.title.Split(' ');
+                    foreach (string s in split)
+                    {
+                        if (s == filters[1] && !library.bookSearchResults.Contains(b))
+                        {
+                            library.bookSearchResults.Add(b);
+                        }
+                    }
+                }
+            } else if (filters[0] == "author")
+            {
+                foreach (Book b in library.books.Books)
+                {
+                    string[] split = b.author.name.Split(' ');
+                    foreach (string s in split)
+                    {
+                        if (s == filters[1] && !library.bookSearchResults.Contains(b))
+                        {
+                            library.bookSearchResults.Add(b);
+                        }
+                    }
+                }
+            } else if (filters[0] == "category")
+            {
+                foreach (Book b in library.books.Books)
+                {
+                    string[] split = b.category.Split(' ');
+                    foreach (string s in split)
+                    {
+                        if (s == filters[1] && !library.bookSearchResults.Contains(b))
+                        {
+                            library.bookSearchResults.Add(b);
+                        }
+                    }
+                }
+            } else
+            {
+
+            }
+            return RedirectToAction("SearchResults");
+        }
+
+        public IActionResult SearchResults(List<Book> books)
+        {
+            return View(library);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

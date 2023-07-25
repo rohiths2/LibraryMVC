@@ -1,0 +1,32 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Search for books by title, author, or category";
+}
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1>Book Search Feature</h1>
+    <h1 class="display-4">Search for books by title, author, or category</h1>
+
+    @using (Html.BeginForm("SearchOptions", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr><th>Enter the information in each box </th><th>following the directions to the left</th></tr>
+            <tr>
+                <td>What filter do you want to use? (type "title", "author", or "category") </td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Type the search keyword (searching for titles/authors/categories containing this keyword).</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

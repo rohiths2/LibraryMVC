@@ -12,6 +12,7 @@
         public BookContainer books = new BookContainer();
         public AuthorContainer authors = new AuthorContainer();
         public List<User> users;
+        public List<Book> bookSearchResults = new List<Book>();
 
         public void setTitle(string title) {  this.title = title; }
         public BookContainer GetBooks() { return books; }

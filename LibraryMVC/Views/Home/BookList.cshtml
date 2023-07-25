@@ -6,9 +6,9 @@
 
 <style>
     table, th, td {
-        border: 1px solid black;
+        border: 1px solid blue;
         border-collapse: collapse;
-        font-size: 16px;
+        font-size: 20px;
     }
 
     th {
@@ -27,8 +27,6 @@
             <td>Book Category</td>
             <td>Date Published (MMDDYY)</td>
             <td>Author Name</td>
-            <td>Author Birth Date (MMDDYY)</td>
-            <td>Author Bio</td>
             @{
                 int i = 0;
             }
@@ -40,8 +38,6 @@
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).category)</td>
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).publishDate)</td>
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).author.name)</td>
-                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).author.birthdate)</td>
-                <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).author.bio)</td>
             </tr>
             i++;
         }

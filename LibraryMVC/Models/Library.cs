@@ -27,6 +27,7 @@
                 }
             }
             Book newBook = new Book(title, authorName, authorBD, category, publishDate, quantity);
+            AddAuthor(authorName, authorBD, "");
             books.Add(newBook);
         }
 
@@ -40,6 +41,7 @@
                     return;
                 }
             }
+            AddAuthor(book.author.name, book.author.birthdate, "");
             books.Add(book);
         }
 

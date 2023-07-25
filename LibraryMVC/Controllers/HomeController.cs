@@ -62,6 +62,8 @@ namespace LibraryMVC.Controllers
             library.AddBook(book2);
             library.AddBook(book3);
             library.AddBook(book1);
+            library.authors.Authors.ElementAt(0).bio = "bio for author 1";
+            library.authors.Authors.ElementAt(1).bio = "bio for author 2";
             return View(library);
         }
 

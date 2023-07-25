@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Library
+
 @{
+    ViewData["Title"] = "Book List";
 }
+
+<style>
+    table, th, td {
+        border: 1px solid blue;
+        border-collapse: collapse;
+        font-size: 20px;
+    }
+
+    th {
+        background-color: #96D4D4;
+    }
+</style>
+
+<h1>Author List</h1>
+<h2>To Add/Edit an Author, click on the Add/Edit Author on the top navigation bar.</h2>
+
+
+<div class="text-center">
+    <table id="table">
+        <tr>
+            <td>Author Name</td>
+            <td>Author Date of Birth</td>
+            <td>Author Bio</td>
+            <td># Books Written</td>
+            @{
+                int i = 0;
+            }
+        </tr>
+        @foreach (Author a in Model.authors.Authors)
+        {
+            <tr>
+                <td>@Html.EditorFor(x => x.authors.Authors.ElementAt(i).name)</td>
+                <td>@Html.EditorFor(x => x.authors.Authors.ElementAt(i).birthdate)</td>
+                <td>@Html.EditorFor(x => x.authors.Authors.ElementAt(i).bio)</td>
+                @{
+                    int count = 0;
+                    foreach (Book b in Model.books.Books)
+                    {
+                        if (b.author.name == a.name)
+                        {
+                            count++;
+                        }
+                    }
+                }
+                <td>@count</td>
+            </tr>
+            i++;
+        }
+    </table>
+    }
+</div>

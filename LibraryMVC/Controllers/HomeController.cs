@@ -163,6 +163,47 @@ namespace LibraryMVC.Controllers
             return View(library);
         }
 
+        public bool containsCategory(string category)
+        {
+            if (library.categoryInfo.Count > 0)
+            {
+                foreach (string[] c in library.categoryInfo)
+                {
+                    if (c[0] == category)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public IActionResult CategoryList()
+        {
+            foreach (Book b in library.books.Books)
+            {
+                if (!containsCategory(b.category))
+                {
+                    library.categoryInfo.Add(new string[] {b.category, "" });
+                }
+            }
+            return View(library);
+        }
+
+        public IActionResult CreateNewCategory()
+        {
+            string[] newCategoryInfo = new string[2];
+            return View(newCategoryInfo);
+        }
+
+        [HttpPost]
+        public IActionResult CreateNewCategory(string[] newCategoryInfo)
+        {
+            library.addCategory(newCategoryInfo[0], newCategoryInfo[1]);
+            return RedirectToAction("CategoryList");
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -13,6 +13,25 @@
         public AuthorContainer authors = new AuthorContainer();
         public List<User> users;
         public List<Book> bookSearchResults = new List<Book>();
+        public List<string[]> categoryInfo = new List<string[]>();
+
+        public void addCategory(string name, string description)
+        {
+            foreach (string[] category in categoryInfo)
+            {
+                if (category[0] == name)
+                {
+                    category[1] = description;
+                    return;
+                }
+                if (category[1] == description)
+                {
+                    category[0] = name;
+                    return;
+                }
+            }
+            categoryInfo.Add(new string[] { name, description });
+        }
 
         public void setTitle(string title) {  this.title = title; }
         public BookContainer GetBooks() { return books; }

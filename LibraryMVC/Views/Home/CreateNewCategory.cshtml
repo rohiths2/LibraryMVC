@@ -1,0 +1,35 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Add a New Category, OR Edit an Existing Category";
+}
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Add a New Category, OR Edit an Existing Category</h1>
+
+    <h2> DIRECTIONS: </h2>
+    <p> To ADD A NEW CATEGORY, enter the name and description of the category. </p>
+    <p> To EDIT AN EXISTING CATEGORY, enter the name of the category and edit the description. Or enter the description of the category to edit the name.</p>
+
+    @using (Html.BeginForm("CreateNewCategory", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr><th>Enter category </th><th>information below</th></tr>
+            <tr>
+                <td>Category name</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Category description</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

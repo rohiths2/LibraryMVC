@@ -1,0 +1,41 @@
+﻿@model Library
+
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<style>
+    table, th, td {
+        border: 1px solid blue;
+        border-collapse: collapse;
+        font-size: 20px;
+    }
+
+    th {
+        background-color: #96D4D4;
+    }
+</style>
+
+<h1>Category List</h1>
+
+
+<div class="text-center">
+    <table id="table">
+        <tr>
+            <td>Category Name</td>
+            <td>Category Description</td>
+            @{
+                int i = 0;
+            }
+        </tr>
+        @foreach (string[] c in Model.categoryInfo)
+        {
+            <tr>
+                <td>@Html.EditorFor(x => x.categoryInfo.ElementAt(i)[0])</td>
+                <td>@Html.EditorFor(x => x.categoryInfo.ElementAt(i)[1])</td>
+            </tr>
+            i++;
+        }
+    </table>
+    }
+</div>

@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model string[]
+
 @{
+    ViewData["Title"] = "Add a New Author, OR Edit an Existing Author";
 }
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Add Information for Author, or Edit Previous Author</h1>
+
+    <h2> DIRECTIONS: </h2>
+    <p> To ADD A NEW AUTHOR, enter the name, birthdate, and bio for the new author and click submit. </p>
+    <p> To EDIT AN EXISTING AUTHOR, enter 2 of the existing fields the same, and enter new info for the remaining field.</p>
+    <p> E.g.: To change Author 1's bio, enter the same name and birthdate for Author 1, and enter a different bio.'</p>
+    <p> Only one attribute of an author can be changed at a single time. </p>
+
+    @using (Html.BeginForm("CreateNewAuthor", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr><th>Enter new author </th><th>information below</th></tr>
+            <tr>
+                <td>Author name (first and last)</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Author date of birth (MMDDYY 6 digit format)</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td>Author bio</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

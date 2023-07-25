@@ -51,6 +51,17 @@
             {
                 if (a.name == name && a.birthdate == BD)
                 {
+                    a.bio = bio;
+                    return;
+                }
+                else if (a.bio == bio && a.name == name)
+                {
+                    a.birthdate = BD;
+                    return;
+                }
+                else if (a.birthdate == BD && a.bio == bio)
+                {
+                    a.name = name;
                     return;
                 }
             }

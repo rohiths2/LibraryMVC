@@ -87,14 +87,14 @@ namespace LibraryMVC.Controllers
 
         public IActionResult CreateNewAuthor()
         {
-            Author a = new Author();
-            return View(a);
+            string[] newAuthorInfo = new string[3];
+            return View(newAuthorInfo);
         }
 
         [HttpPost]
-        public IActionResult CreateNewAuthor(Author a)
+        public IActionResult CreateNewAuthor(string[] newAuthorInfo)
         {
-            library.AddAuthor(a.name, a.birthdate, a.bio);
+            library.AddAuthor(newAuthorInfo[0], Convert.ToInt32(newAuthorInfo[1]), newAuthorInfo[2]);
             return RedirectToAction("AuthorList");
         }
 

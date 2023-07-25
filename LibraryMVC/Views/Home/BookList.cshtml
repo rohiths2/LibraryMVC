@@ -27,6 +27,7 @@
             <td>Book Category</td>
             <td>Date Published (MMDDYY)</td>
             <td>Author Name</td>
+            <td>Quantity Available</td>
             @{
                 int i = 0;
             }
@@ -38,6 +39,7 @@
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).category)</td>
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).publishDate)</td>
                 <td>@Html.EditorFor(x => x.books.Books.ElementAt(i).author.name)</td>
+                <td>@b.quantity</td>
             </tr>
             i++;
         }

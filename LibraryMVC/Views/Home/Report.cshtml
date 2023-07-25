@@ -1,5 +1,128 @@
-﻿@*
+﻿@model Library
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+<h1>Statistics Dashboard</h1>
+<p> </p>
 @{
+    int total = 0;
+    foreach (Book b in Model.books.Books)
+    {
+        if (b != null)
+        {
+            total += b.quantity;
+        }
+    }
+
+    <h2>Total count of books available now: @total</h2>
+    <p> </p>
+    int different = Model.books.Books.Count();
+    <h2>Number of distinct books in the library: @different</h2>
+    <p> </p>
+
+    int available = 0;
+    int largestcount = 0;
+
+    foreach (Book b in Model.books.Books)
+    {
+        if (b != null && b.quantity > 0)
+        {
+            available = 1;
+            if (b.quantity > largestcount)
+            {
+                largestcount = b.quantity;
+            }
+        }
+    }
+    
+    <h2>Number of AVAILABLE distinct books now: @available</h2>
+
+    string mostPopularBooks = "";
+
+    foreach (Book b in Model.books.Books)
+    {
+        if (b != null && b.quantity == largestcount)
+        {
+            mostPopularBooks += b.title + " (quantity=" + b.quantity + ")" + ", ";
+        }
+    }
+
+    int maxNumberOfBooksPerAuthor = 0;
+
+    foreach (Author a in Model.authors.Authors)
+    {
+        int countForAuthor = 0;
+        foreach(Book b in Model.books.Books)
+        {
+            if (b.author.name == a.name)
+            {
+                countForAuthor++;
+            }
+        }
+        if (countForAuthor > maxNumberOfBooksPerAuthor)
+        {
+            maxNumberOfBooksPerAuthor = countForAuthor;
+        }
+    }
+
+    string popularAuthors = "";
+
+    foreach (Author a in Model.authors.Authors)
+    {
+        int countForAuthor = 0;
+        foreach (Book b in Model.books.Books)
+        {
+            if (b.author.name == a.name)
+            {
+                countForAuthor++;
+            }
+        }
+        if (countForAuthor == maxNumberOfBooksPerAuthor)
+        {
+            popularAuthors += a.name + " (books written: " + countForAuthor + "), ";
+        }
+    }
+
+    <h2>Most popular book(s) in the library now: @mostPopularBooks</h2>
+    <p> </p>
+    <h2>Most borrowed books: TBD</h2>
+    <p> </p>
+    <h2>Most popular author(s) now: @popularAuthors</h2>
+    <p> </p>
+
+    List<string[]> categoryCounts = new List<string[]>();
+
+    foreach (Book b in Model.books.Books) {
+        bool contains = false;
+        foreach (string[] part in categoryCounts)
+        {
+            if (part[0] == b.category)
+            {
+                part[1] = (Convert.ToInt32(part[1]) + 1).ToString();
+                contains = true;
+            }
+        }
+        if (contains == false)
+        {
+            categoryCounts.Add(new string[] { b.category, "1"});
+        }
+    }
+
+    string mostPopularCategory = "";
+    int countForMostPopularCategory = 0;
+
+    foreach (string[] part in categoryCounts)
+    {
+        if (Convert.ToInt32(part[1]) > countForMostPopularCategory)
+        {
+            countForMostPopularCategory = Convert.ToInt32(part[1]);
+            mostPopularCategory = part[0];
+        }
+    }
+
+    <h2>Most popular book category now: @mostPopularCategory</h2>
 }
+
+
+
+

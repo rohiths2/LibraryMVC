@@ -9,8 +9,8 @@
             authors = new AuthorContainer();
         }
         public string title;
-        public BookContainer books;
-        public AuthorContainer authors;
+        public BookContainer books = new BookContainer();
+        public AuthorContainer authors = new AuthorContainer();
         public List<User> users;
 
         public void setTitle(string title) {  this.title = title; }

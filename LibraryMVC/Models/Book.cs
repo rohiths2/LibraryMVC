@@ -11,7 +11,7 @@ namespace LibraryMVC.Models
         public int quantity;
         public Book()
         {
-            title = "";
+            title = "initialized";
             author = new Author();
             category = "";
             DateTime today = DateTime.Now;

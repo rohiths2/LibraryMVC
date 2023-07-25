@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model string[]
+
 @{
+    ViewData["Title"] = "Add a New Book";
 }
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Add Information for Book</h1>
+
+    <h2>DIRECTIONS: If you want to ADD A NEW book, enter all the information below (title, author, category, etc.) and then press submit. </h2>
+    <h2>If you want to add ANOTHER INSTANCE OF AN EXISTING BOOK (which increases the quantity), enter the title and author of that same book (category and other fields will not matter for this option). Press submit when done.</h2>
+    @using (Html.BeginForm("CreateNewBook", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr><th>Enter new book </th><th>information below</th></tr>
+            <tr>
+                <td>Book Title</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Author Name</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td>Author Date of Birth</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>@Html.TextBoxFor(x => x[3])</td>
+            </tr>
+            <tr>
+                <td>Publishing Date (MMDDYY)</td>
+                <td>@Html.TextBoxFor(x => x[4])</td>
+            </tr>
+            <tr>
+                <td>How many instances of this book do you want to add?</td>
+                <td>@Html.TextBoxFor(x => x[5])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

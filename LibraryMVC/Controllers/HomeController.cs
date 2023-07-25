@@ -58,9 +58,11 @@ namespace LibraryMVC.Controllers
 
         public IActionResult BookList()
         {
-            if (!BookListContains(book1)) { library.AddBook(book1); }
-            if (!BookListContains(book2)) { library.AddBook(book2); }
-            if (!BookListContains(book3)) { library.AddBook(book3); }
+            if (!BookListContains(book1)) { library.books.Books.Add(book1); }
+            if (!BookListContains(book2)) { library.books.Books.Add(book2); }
+            if (!BookListContains(book3)) { library.books.Books.Add(book3); }
+            if (!AuthorListContains(book1.author)) { library.authors.Authors.Add(book1.author); }
+            if (!AuthorListContains(book2.author)) { library.authors.Authors.Add(book2.author); }
             library.authors.Authors.ElementAt(0).bio = "bio for author 1";
             library.authors.Authors.ElementAt(1).bio = "bio for author 2";
             return View(library);
@@ -68,14 +70,14 @@ namespace LibraryMVC.Controllers
 
         public IActionResult CreateNewBook()
         {
-            Book b = new Book();
-            return View(b);
+            string[] newBookInfo = new string[6];
+            return View(newBookInfo);
         }
 
         [HttpPost]
-        public IActionResult CreateNewBook(Book b)
+        public IActionResult CreateNewBook(string[] newBookInfo)
         {
-            library.AddBook(b);
+            library.AddBook(new Book(newBookInfo[0], newBookInfo[1], Convert.ToInt32(newBookInfo[2]), newBookInfo[3], Convert.ToInt32(newBookInfo[4]), Convert.ToInt32(newBookInfo[5])));
             return RedirectToAction("BookList");
         }
         public IActionResult AuthorList()

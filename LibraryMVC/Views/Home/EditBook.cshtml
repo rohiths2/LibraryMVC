@@ -10,8 +10,8 @@
 <div class="text-center">
     <h1 class="display-4">Edit Book Information</h1>
 
-    <h2>DIRECTIONS: If you want to ADD A NEW book, enter all the information below (title, author, category, etc.) and then press submit. </h2>
-    <h2>If you want to add ANOTHER INSTANCE OF AN EXISTING BOOK (which increases the quantity), enter the title and author of that same book (category and other fields will not matter for this option). Press submit when done.</h2>
+    <h2>DIRECTIONS: To edit an attribute, enter OLD and NEW information. To leave as is, leave both fields blank.</h2>
+    <h2>Any books with information in the OLD field will be replaced with information in the corresponding NEW field.</h2>
     @using (Html.BeginForm("EditBook", "Home", FormMethod.Post))
     {
         <table>
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <td>NEW Book Title</td>
-                <td>@Html.TextBoxFor(x => x[1])</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>sssss
             </tr>
             <tr>
                 <td>OLD Book Author Name</td>

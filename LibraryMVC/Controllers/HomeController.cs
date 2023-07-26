@@ -237,7 +237,51 @@ namespace LibraryMVC.Controllers
             return RedirectToAction("BookList");
         }
 
+        public IActionResult Delete()
+        {
+            string[] deleteInfo = new string[3];
+            return View(deleteInfo);
+        }
 
+        [HttpPost]
+        public IActionResult Delete(string[] deleteInfo)
+        {
+            foreach (Book b in library.books.Books)
+            {
+                if (deleteInfo[0] == b.title)
+                {
+                    library.books.Books.Remove(b);
+                    break;
+                }
+                if (deleteInfo[1] == b.author.name)
+                {
+                    library.books.Books.Remove(b);
+                    break;
+                }
+                if (deleteInfo[2] == b.category)
+                {
+                    library.books.Books.Remove(b);
+                    break;
+                }
+            }
+            foreach (Author a in library.authors.Authors)
+            {
+                if (a.name == deleteInfo[1])
+                {
+                    library.authors.Authors.Remove(a);
+                    break;
+                }
+            }
+            foreach (string[] c in library.categoryInfo)
+            {
+                if (c[0] == deleteInfo[2])
+                {
+                    library.categoryInfo.Remove(c);
+                    break;
+                }
+            }
+            return RedirectToAction("BookList");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

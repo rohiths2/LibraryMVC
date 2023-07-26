@@ -1,0 +1,38 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Delete Books, Authors, or Categories</h1>
+    <h2>Directions: To delete a title/author/category, enter the information in any of the boxes below.</h2>
+    <h2>All books containing the title/author/category you entered will be deleted.</h2>
+    <h2>You can delete only one of a certain attribute at a single time, then go to the delete page again.</h2>
+    <h2>Spaces left blank will NOT be deleted.</h2>
+
+    @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>Book Title to Delete</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Author to Delete</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td>Category to Delete</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

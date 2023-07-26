@@ -9,6 +9,7 @@ namespace LibraryMVC.Models
             title = "";
             books = new BookContainer();
             authors = new AuthorContainer();
+            users.Add(new User("Admin1", "admin"));
         }
         public User currentUser = new User("Admin1", "admin");
         public List<Order> orders = new List<Order>();
@@ -16,7 +17,7 @@ namespace LibraryMVC.Models
         public string recentOrder = ".";
         public BookContainer books = new BookContainer();
         public AuthorContainer authors = new AuthorContainer();
-        public List<User> users;
+        public List<User> users = new List<User>();
         public List<Book> bookSearchResults = new List<Book>();
         public List<string[]> categoryInfo = new List<string[]>();
 

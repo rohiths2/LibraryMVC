@@ -1,7 +1,7 @@
 ﻿@model string[]
 
 @{
-    ViewData["Title"] = "Welcome to MVC Library. Please sign in.";
+    ViewData["Title"] = "Create a new account";
 }
 
 <style>
@@ -12,9 +12,9 @@
 </head>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to MVC Library. Please sign in.</h1>
+    <h1 class="display-4">Create a new library account.</h1>
 
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    @using (Html.BeginForm("CreateAccount", "Home", FormMethod.Post))
     {
         <table>
             <tr><th>Enter your user </th><th>information below</th></tr>
@@ -27,15 +27,14 @@
                 <td>@Html.TextBoxFor(x => x[1])</td>
             </tr>
             <tr>
+                <td>Role</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
                 <td><input type="submit" value="Submit" /></td>
                 <td></td>
             </tr>
         </table>
-        <ul>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateAccount">Create New User</a>
-            </li>
-        </ul>
     }
-    
+
 </div>

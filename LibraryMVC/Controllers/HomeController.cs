@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Xml.Linq;
 
@@ -50,10 +51,61 @@ namespace LibraryMVC.Controllers
             return false;
         }
 
+        public bool userExists(string username_, string password_)
+        {
+            foreach (User u in library.users)
+            {
+                if (u.username == username_ && u.password == password_) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
         public IActionResult Index()
         {
+            string[] credentials = new string[6];
             library.setTitle("MVC Library");
-            return View(library);
+            return View(credentials);
+        }  
+
+        [HttpPost]
+        public IActionResult Index(string[] credentials)
+        {
+            if (userExists(credentials[0], credentials[1])) {
+                library.currentUser.username = credentials[0];
+                library.currentUser.password = credentials[1];
+                foreach (User u in library.users)
+                {
+                    if (u.username == credentials[0])
+                    {
+                        library.currentUser.role = u.role;
+                        break;
+                    }
+                }
+                return RedirectToAction("BookList");
+            } else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult CreateAccount()
+        {
+            string[] credentials = new string[6];
+            return View(credentials);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateAccount(string[] credentials)
+        {
+            User created = new User(credentials[0], credentials[2]);
+            created.password = credentials[1];
+            library.users.Add(created);
+            return RedirectToAction("Index");
         }
 
         public IActionResult BookList()

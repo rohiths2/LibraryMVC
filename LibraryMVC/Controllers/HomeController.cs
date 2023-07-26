@@ -93,6 +93,11 @@ namespace LibraryMVC.Controllers
 
         public IActionResult CreateNewBook()
         {
+            if (library.currentUser.role != "admin" && library.currentUser.role != "librarian")
+            {
+                library.recentOrder = "Edits cannot be performed by members (only admins or librarians)";
+                return RedirectToAction("BookList");
+            }
             string[] newBookInfo = new string[6];
             return View(newBookInfo);
         }
@@ -110,6 +115,11 @@ namespace LibraryMVC.Controllers
 
         public IActionResult CreateNewAuthor()
         {
+            if (library.currentUser.role != "admin" && library.currentUser.role != "librarian")
+            {
+                library.recentOrder = "Edits cannot be performed by members (only admins or librarians)";
+                return RedirectToAction("BookList");
+            }
             string[] newAuthorInfo = new string[3];
             return View(newAuthorInfo);
         }
@@ -215,6 +225,11 @@ namespace LibraryMVC.Controllers
 
         public IActionResult CreateNewCategory()
         {
+            if (library.currentUser.role != "admin" && library.currentUser.role != "librarian")
+            {
+                library.recentOrder = "Edits cannot be performed by members (only admins or librarians)";
+                return RedirectToAction("BookList");
+            }
             string[] newCategoryInfo = new string[2];
             return View(newCategoryInfo);
         }
@@ -229,6 +244,11 @@ namespace LibraryMVC.Controllers
         public IActionResult EditBook()
         {
             string[] bookEdit = new string[8];
+            if (library.currentUser.role != "admin" && library.currentUser.role != "librarian")
+            {
+                library.recentOrder = "Edits cannot be performed by members (only admins or librarians)";
+                return RedirectToAction("BookList");
+            }
             return View(bookEdit);
         }
 
@@ -262,6 +282,11 @@ namespace LibraryMVC.Controllers
 
         public IActionResult Delete()
         {
+            if (library.currentUser.role != "admin" && library.currentUser.role != "librarian")
+            {
+                library.recentOrder = "Edits cannot be performed by members (only admins or librarians)";
+                return RedirectToAction("BookList");
+            }
             string[] deleteInfo = new string[3];
             return View(deleteInfo);
         }

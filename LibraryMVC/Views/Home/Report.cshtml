@@ -21,17 +21,23 @@
     <table>
     <tr>
     <th>Username</th><th>Book title</th><th>Due date</th><th>Status</th></tr>
-    @{
-    foreach (Order o in Model.orders)
-    {
-        <tr>
-        <td>@Html.EditorFor(x => x.orders.ElementAt(j).name)</td>
-            <td>@Html.EditorFor(x => x.orders.ElementAt(j).bookTitle)</td>
-            <td></td>
-            <td>@Html.EditorFor(x => x.orders.ElementAt(j).returned)</td>
-        </tr>
-        j++;
-    }
+        @{
+            if (Model.currentUser.role == "admin" || Model.currentUser.role == "librarian")
+            {
+                foreach (Order o in Model.orders)
+                {
+                    <tr>
+                        <td>@Html.EditorFor(x => x.orders.ElementAt(j).name)</td>
+                        <td>@Html.EditorFor(x => x.orders.ElementAt(j).bookTitle)</td>
+                        <td>@Html.EditorFor(x => x.orders.ElementAt(j).dueDate)</td>
+                        <td>@Html.EditorFor(x => x.orders.ElementAt(j).returned)</td>
+                    </tr>
+                    j++;
+                }
+            } else
+            {
+                <tr><td colspan="4">Members cannot view the recent orders. Only admins and librarians can.</td></tr>
+            }
     }
     </table>
 

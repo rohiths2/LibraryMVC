@@ -1,4 +1,6 @@
-﻿namespace LibraryMVC.Models
+﻿using System.Reflection;
+
+namespace LibraryMVC.Models
 {
     public class Library
     {
@@ -20,7 +22,11 @@
 
         public void addCategory(string name, string description)
         {
-            foreach (string[] category in categoryInfo)
+            if (currentUser.role != "admin" && currentUser.role != "librarian")
+            {
+                return;
+            }
+                foreach (string[] category in categoryInfo)
             {
                 if (category[0] == name)
                 {

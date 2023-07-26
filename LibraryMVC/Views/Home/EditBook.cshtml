@@ -1,0 +1,57 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Edit Book Info";
+}
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Edit Book Information</h1>
+
+    <h2>DIRECTIONS: If you want to ADD A NEW book, enter all the information below (title, author, category, etc.) and then press submit. </h2>
+    <h2>If you want to add ANOTHER INSTANCE OF AN EXISTING BOOK (which increases the quantity), enter the title and author of that same book (category and other fields will not matter for this option). Press submit when done.</h2>
+    @using (Html.BeginForm("EditBook", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr><th>Enter new book </th><th>information below</th></tr>
+            <tr>
+                <td>OLD Book Title</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>NEW Book Title</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td>OLD Book Author Name</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
+                <td>NEW Book Author Name</td>
+                <td>@Html.TextBoxFor(x => x[3])</td>
+            </tr>
+            <tr>
+                <td>OLD Book Category</td>
+                <td>@Html.TextBoxFor(x => x[4])</td>
+            </tr>
+            <tr>
+                <td>NEW Book Category</td>
+                <td>@Html.TextBoxFor(x => x[5])</td>
+            </tr>
+            <tr>
+                <td>OLD Book Publish Date (make sure to put in MMDDYY format)</td>
+                <td>@Html.TextBoxFor(x => x[6])</td>
+            </tr>
+            <tr>
+                <td>NEW Book Publish Date (make sure to put in MMDDYY format)</td>
+                <td>@Html.TextBoxFor(x => x[7])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

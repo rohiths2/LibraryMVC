@@ -203,6 +203,41 @@ namespace LibraryMVC.Controllers
             return RedirectToAction("CategoryList");
         }
 
+        public IActionResult EditBook()
+        {
+            string[] bookEdit = new string[8];
+            return View(bookEdit);
+        }
+
+        [HttpPost]
+        public IActionResult EditBook(string[] bookEdit)
+        {
+            foreach (Book b in library.books.Books)
+            {
+                if (b.title == bookEdit[0])
+                {
+                    b.title = bookEdit[1];
+                }
+                if (b.author.name == bookEdit[2])
+                {
+                    b.author.name = bookEdit[3];
+                }
+                if (b.category == bookEdit[4])
+                {
+                    b.category = bookEdit[5];
+                }
+                if (Convert.ToInt32(bookEdit[6]) != null && b.publishDate == Convert.ToInt32(bookEdit[6]))
+                {
+                    if (Convert.ToInt32(bookEdit[7]) != null)
+                    {
+                        b.publishDate = Convert.ToInt32(bookEdit[7]);
+                    }
+                }
+            }
+            return RedirectToAction("BookList");
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

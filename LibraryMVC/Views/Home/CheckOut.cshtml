@@ -1,0 +1,34 @@
+﻿@model string[]
+
+@{
+    ViewData["Title"] = "Check Out or Return";
+}
+
+<style>
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Borrow or Return a Book</h1>
+
+    @using (Html.BeginForm("CheckOut", "Home", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>Do you want to borrow or return a book? Type "borrow" or "return" (without quotes).</td>
+                <td>@Html.TextBoxFor(x => x[0])</td>
+            </tr>
+            <tr>
+                <td>Book Title to Borrow/Return</td>
+                <td>@Html.TextBoxFor(x => x[1])</td>
+            </tr>
+            <tr>
+                <td>Book Author to Borrow/Return</td>
+                <td>@Html.TextBoxFor(x => x[2])</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

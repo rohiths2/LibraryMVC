@@ -68,6 +68,29 @@ namespace LibraryMVC.Controllers
             return View(library);
         }
 
+        public IActionResult CheckOut()
+        {
+            string[] info = new string[3];
+            return View(info);
+        }
+
+        [HttpPost]
+        public IActionResult CheckOut(string[] info)
+        {
+            if (info[0] == "borrow")
+            {
+                library.recentOrder = library.borrowBook(info[1], info[2]);
+            } else if (info[0] == "return")
+            {
+                library.returnBook(info[1], info[2]);
+                library.recentOrder = "Returned";
+            } else
+            {
+                library.recentOrder = "Please try again: make sure you typed borrow or return correctly.";
+            }
+            return RedirectToAction("BookList");
+        }
+
         public IActionResult CreateNewBook()
         {
             string[] newBookInfo = new string[6];

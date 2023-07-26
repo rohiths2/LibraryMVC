@@ -2,9 +2,39 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+<style>
+    table, th, td {
+        border: 1px solid blue;
+        border-collapse: collapse;
+        font-size: 20px;
+    }
+
+    th {
+        background-color: #96D4D4;
+    }
+</style>
 <h1>Statistics Dashboard</h1>
 <p> </p>
 @{
+    <h2>Recent Orders</h2>
+    int j = 0;
+    <table>
+    <tr>
+    <th>Username</th><th>Book title</th><th>Due date</th><th>Status</th></tr>
+    @{
+    foreach (Order o in Model.orders)
+    {
+        <tr>
+        <td>@Html.EditorFor(x => x.orders.ElementAt(j).name)</td>
+            <td>@Html.EditorFor(x => x.orders.ElementAt(j).bookTitle)</td>
+            <td></td>
+            <td>@Html.EditorFor(x => x.orders.ElementAt(j).returned)</td>
+        </tr>
+        j++;
+    }
+    }
+    </table>
+
     int total = 0;
     foreach (Book b in Model.books.Books)
     {
@@ -85,7 +115,12 @@
 
     <h2>Most popular book(s) in the library now: @mostPopularBooks</h2>
     <p> </p>
-    <h2>Most borrowed books: TBD</h2>
+    string recentlyBorrowed = "";
+    for (int i = 0; i < 5 && i < Model.recentlyBorrowedBooks.Count(); i++)
+    {
+        recentlyBorrowed += Model.recentlyBorrowedBooks[i] + ", ";
+    }
+    <h2>Most borrowed books: @recentlyBorrowed</h2>
     <p> </p>
     <h2>Most popular author(s) now: @popularAuthors</h2>
     <p> </p>

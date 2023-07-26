@@ -8,7 +8,10 @@
             books = new BookContainer();
             authors = new AuthorContainer();
         }
+        public User currentUser = new User("Admin1", "admin");
+        public List<Order> orders = new List<Order>();
         public string title;
+        public string recentOrder = ".";
         public BookContainer books = new BookContainer();
         public AuthorContainer authors = new AuthorContainer();
         public List<User> users;
@@ -31,6 +34,42 @@
                 }
             }
             categoryInfo.Add(new string[] { name, description });
+        }
+
+        public List<string> recentlyBorrowedBooks = new List<string>();
+
+        public string borrowBook(string title, string authorName)
+        {
+            foreach (Book b in books.Books)
+            {
+                if (b.title == title && b.author.name ==  authorName && b.quantity > 0)
+                {
+                    recentlyBorrowedBooks.Insert(0, b.title);
+                    b.quantity = b.quantity - 1;
+                    orders.Add(new Order(currentUser.username, b.title, DateTime.Today.AddDays(7)));
+                    return "You borrowed " + b.title + ". The due date is " + DateTime.Today.AddDays(7).ToString();
+                }
+            }
+            return "This book is unavailable at this time. Check the List of Books and try again.";
+        }
+
+        public void returnBook(string title, string authorName)
+        {
+            foreach (Book b in books.Books)
+            {
+                if (b.title == title && b.author.name == authorName)
+                {
+                    b.quantity = b.quantity + 1;
+                }
+            }
+            foreach (Order o in orders)
+            {
+                if (o.bookTitle == title)
+                {
+                    o.returned = "Returned";
+                    break;
+                }
+            }
         }
 
         public void setTitle(string title) {  this.title = title; }

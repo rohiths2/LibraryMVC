@@ -253,15 +253,16 @@ namespace LibraryMVC.Controllers
                     library.books.Books.Remove(b);
                     break;
                 }
-                if (deleteInfo[1] == b.author.name)
+            }
+            int bookIndex = 0;
+            while (bookIndex < library.books.Books.Count)
+            {
+                for (; bookIndex < library.books.Books.Count; bookIndex++)
                 {
-                    library.books.Books.Remove(b);
-                    break;
-                }
-                if (deleteInfo[2] == b.category)
-                {
-                    library.books.Books.Remove(b);
-                    break;
+                    if (deleteInfo[1] == library.books.Books[bookIndex].author.name || deleteInfo[2] == library.books.Books[bookIndex].category)
+                    {
+                        library.books.Books.Remove(library.books.Books[bookIndex]);
+                    }
                 }
             }
             foreach (Author a in library.authors.Authors)
